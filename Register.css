@@ -1,0 +1,117 @@
+// Estilos para el formulario
+const formStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '300px',
+  margin: 'auto',
+  padding: '20px',
+  boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+  borderRadius: '8px',
+  backgroundColor: 'white',
+};
+
+// Estilos para cada campo del formulario
+const fieldStyle = {
+  marginBottom: '10px',
+};
+
+// Estilos para las etiquetas
+const labelStyle = {
+  marginBottom: '5px',
+  fontWeight: 'bold',
+};
+
+// Estilos para los inputs
+const inputStyle = {
+  padding: '10px',
+  borderRadius: '4px',
+  border: '1px solid #ccc',
+};
+
+// Estilos para el botón de submit
+const buttonStyle = {
+  padding: '10px 15px',
+  color: 'white',
+  backgroundColor: '#0073aa',
+  border: 'none',
+  borderRadius: '4px',
+  cursor: 'pointer',
+};
+
+// Estilos para el enlace
+const linkStyle = {
+  textAlign: 'center',
+  marginTop: '15px',
+};
+
+### Componente React Modificado
+Incluyendo los estilos, tu componente `Register.js` quedaría así:
+
+```javascript
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
+
+const Register = () => {
+  const [id_usuario, setIdUsuario] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [contraseña, setContraseña] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate(); // Mover useHistory aquí, al principio del componente.
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(""); // Limpiar errores anteriores
+
+    if (!id_usuario || !nombre || !contraseña) {
+      setError("Por favor, complete todos los campos.");
+      return;
+    }
+
+    const payload = {
+      id_usuario,
+      nombre,
+      contraseña,
+    };
+
+    try {
+      const response = await axios.post("https://192.168.1.7:7000/api/auth/register", payload);
+      alert(`Usuario creado: ${response.data.nombre}`);
+      navigate('/login'); // Usar history aquí después de la respuesta exitosa
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data);
+      } else {
+        setError("Error de red o respuesta no recibida");
+      }
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={formStyle}>
+      {error && <p>{error}</p>}
+      <div style={fieldStyle}>
+        <label style={labelStyle}>
+          ID de usuario:
+          <input type="text" value={id_usuario} onChange={(e) => setIdUsuario(e.target.value)} style={inputStyle} />
+        </label>
+      </div>
+      <div style={fieldStyle}>
+        <label style={labelStyle}>
+          Nombre:
+          <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} style={inputStyle} />
+        </label>
+      </div>
+      <div style={fieldStyle}>
+        <label style={labelStyle}>
+          Contraseña:
+          <input type="password" value={contraseña} onChange={(e) => setContraseña(e.target.value)} style={inputStyle} />
+        </label>
+      </div>
+      <input type="submit" value="Registrarse" style={buttonStyle} />
+      <Link to="/" style={linkStyle}>¿Ya tienes cuenta? Inicia sesión</Link>
+    </form>
+  );
+};
+
+export default Register;

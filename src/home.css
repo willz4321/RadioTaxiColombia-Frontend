@@ -1,0 +1,75 @@
+/* home.css */
+body {
+    background: none; /* Restablece cualquier fondo global */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0 40px; /* Añadir margen interno (padding) para que no esté pegado a los lados */
+  }
+  
+  .contenido {
+    margin-top: 180px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  /* Estilos específicos para menú colapsado en dispositivos móviles */
+  @media (max-width: 991.98px) {
+    .navbar-nav {
+      text-align: center;
+      width: 100%;
+    }
+  
+    .nav-item {
+      margin: 10px 0;
+    }
+  
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-size: 1.2rem;
+    }
+  
+    .nav-link:hover {
+      color: #007bff;
+    }
+  
+    .nav-link svg {
+      margin-right: 8px;
+    }
+  
+    .logout-btn {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .contenido {
+        margin-top: 160px;
+      }
+  }
+
+  .full-screen-map {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background-color: white;
+  }
+
+  .informacionViaje {
+    border: '1px solid gray';
+    padding: '5px';
+    background-color: rgb(251, 251, 251);
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">RadioTaxi</string>
+    <string name="title_activity_main">RadioTaxi</string>
+    <string name="package_name">com.axiomarobotics.radiotaxi</string>
+    <string name="custom_url_scheme">com.axiomarobotics.radiotaxi</string>
+</resources>
